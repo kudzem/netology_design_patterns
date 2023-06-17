@@ -23,6 +23,21 @@ public:
         return *this;
     }
 
+    SqlSelectQueryBuilder& AddColumns(const std::vector<std::string>& columns) noexcept {
+        for (const auto& column : columns) {
+            _column_names.push_back(column);
+        }
+        return *this;
+    }
+
+
+    SqlSelectQueryBuilder& AddWhere(const std::map<std::string, std::string>& kv) noexcept {
+        for (const auto& cond : kv) {
+            _conditions.insert(cond);
+        }
+        return *this;
+    }
+
     SqlSelectQueryBuilder& AddWhere(const std::string& column, const std::string& value) {
         _conditions.insert(make_pair(column, value));
         return *this;

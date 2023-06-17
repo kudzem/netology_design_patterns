@@ -37,4 +37,15 @@ int main()
         assert(query_builder.BuildQuery() == std::string("SELECT name, phone FROM students WHERE id=1;"));
     }
 
+    {
+        SqlSelectQueryBuilder query_builder;
+        std::vector<std::string> columns_names = { "name", "phone" };
+        query_builder.AddColumns(columns_names);
+        query_builder.AddFrom("students");
+        std::map<std::string, std::string> conditions = { {"id", "42"}, {"name", "John"} };
+        query_builder.AddWhere(conditions);
+
+        assert(query_builder.BuildQuery() == std::string("SELECT name, phone FROM students WHERE id=42 AND name=John;"));
+    }
+
 }
