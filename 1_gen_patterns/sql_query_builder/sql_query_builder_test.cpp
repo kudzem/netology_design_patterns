@@ -1,4 +1,5 @@
 #include "sql_select_query_builder.h"
+#include "advanced_sql_query_builder.h"
 #include <iostream>
 #include <cassert>
 
@@ -48,4 +49,22 @@ int main()
         assert(query_builder.BuildQuery() == std::string("SELECT name, phone FROM students WHERE id=42 AND name=John;"));
     }
 
+    {
+        AdvancedSqlSelectQueryBuilder query_builder;
+        query_builder.AddColumns({ "name", "phone" });
+        query_builder.AddFrom("students");
+        query_builder.AddWhere("id", "42");
+        query_builder.AddWhere("id", "<", "99");
+        query_builder.AddWhere("id", "!=", "66");
+        //std::cout << query_builder.BuildQuery();
+        assert(query_builder.BuildQuery() == std::string("SELECT name, phone FROM students WHERE id=42 AND id!=66 AND id<99;"));
+    }
+
+    {
+        AdvancedSqlSelectQueryBuilder query_builder;
+        query_builder.AddColumns({ "name", "phone" });
+        query_builder.AddFrom("students");
+        query_builder.AddWhere("id", "!=", "66");
+        assert(query_builder.BuildQuery() == std::string("SELECT name, phone FROM students WHERE id!=66;"));
+    }
 }
