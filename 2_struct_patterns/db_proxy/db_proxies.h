@@ -12,8 +12,9 @@ class OneShotDB : VeryHeavyDatabase {
 public:
     explicit OneShotDB(VeryHeavyDatabase* real_object, size_t shots = 1) : real_db_(real_object), _request_counter(shots) {}
     std::string GetData(const std::string& key) noexcept {
-        if (_request_counter--) {
+        if (_request_counter != 0) {
             std::cout << "Get from real object\n";
+            _request_counter--;
             return real_db_->GetData(key);
         }
         else {

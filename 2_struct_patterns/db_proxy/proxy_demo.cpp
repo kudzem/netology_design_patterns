@@ -16,6 +16,7 @@ int main() {
     std::cout << short_life_db.GetData("key") << std::endl;
     std::cout << short_life_db.GetData("key") << std::endl;
     std::cout << short_life_db.GetData("key") << std::endl;
+    std::cout << short_life_db.GetData("key") << std::endl;
 
     return 0;
 }
