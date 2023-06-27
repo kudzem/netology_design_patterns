@@ -22,8 +22,12 @@ int main()
     notifier->subsribe(cpu0Server);
     notifier->subsribe(cpu1Server);
     notifier->subsribe(cpu2Server);
+    notifier->subsribe(discServer);
 
     logger->subsribe(discServer);
+    logger->subsribe(cpu0Server);
+
+    std::cout << "All ready" << std::endl;
 
     cpu0Server->inform_about_high_load();
     cpu1Server->inform_about_high_load();

@@ -33,9 +33,8 @@ public:
     int delete_supscription(std::weak_ptr<Observer> old_subsciber);
 
     virtual ~Observable() {
-        std::cout << "Destroy observable " << this << std::endl; \
+        std::cout << "Destroy observable " << this << std::endl;
     }
-
 };
 
 class DiskMonitoringServer : public Observable {
